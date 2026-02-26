@@ -14,7 +14,7 @@ Both start together via `yarn dev` from `daniel-portal/`.
 ### Key caveats
 - **Node version**: Requires Node 18 or 20 (`engines` field in `package.json`). Node 22+ is not supported. Use `nvm use 20` before running commands.
 - **Database**: Dev mode uses in-memory SQLite (`better-sqlite3`). No external database needed.
-- **GitHub OAuth**: The frontend `App.tsx` is hardcoded to require GitHub OAuth sign-in. Without a configured OAuth app (`app-config.local.yaml`), the UI shows a sign-in page that blocks further navigation. The backend API at port 7007 works independently and can be used for testing catalog/search functionality directly (e.g. `curl http://localhost:7007/api/catalog/entities`).
+- **GitHub OAuth**: The original `App.tsx` was hardcoded to require GitHub OAuth sign-in. The `SignInPage` component override has been removed to allow unauthenticated access for local development. To re-enable GitHub auth, add back the `SignInPage` component in `createApp()` and configure an OAuth app in `app-config.local.yaml` (see `README.md` steps 5-7).
 - **Pre-existing lint error**: `packages/app/src/App.tsx` has a lint error (`import/newline-after-import`). This is in the existing code.
 - **Lint command**: `yarn lint:all` lints all packages. The default `yarn lint` uses `--since origin/master` which may not work on branches without that ref.
 
